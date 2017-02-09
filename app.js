@@ -5,10 +5,12 @@ var state = {
     date: "",
 }
 
+
 var addPOD = function(state,url,text,date) {
     state.url = url;
     state.text = text;
     state.date = date;
+    renderData(state);
 }
 
 function getDataFromApi(myDate) {
@@ -23,6 +25,14 @@ function getDataFromApi(myDate) {
 
 }
 
+function renderData(state) {
+    var listElements = "<p>" + state.date + "</p>" +
+        "<p>" + state.text + "</p>" +
+        "<img src ='" + state.url + "'>";
+
+
+    $('main').html(listElements);
+}
 
 function callback(data){
   var url = data.url;
@@ -37,6 +47,7 @@ $(function eventHandlers() {
         event.preventDefault();
         var myDate = $(event.currentTarget).find('.js-query').val();
         getDataFromApi(myDate);
+
     });
 })
 
