@@ -41,7 +41,6 @@ $(function eventHandlers() {
 })
 
 
-
 // https://api.nasa.gov/EPIC/api/natural/date/2015-10-31?api_key=eZW6vATkVUO5a2rbju1e9NZyCF88YB7oBr86Sfuc
 // epic_1b_20151031022436_01
 // https://api.nasa.gov/EPIC/archive/enhanced/2016/12/04/png/epic_1b_20151031022436_01.png?api_key=DEMO_KEY
