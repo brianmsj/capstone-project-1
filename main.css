@@ -21,17 +21,24 @@ body {
 }
 
 .js-query {
-  height: 50px;
+  height: 100px;
   width: 250px;
   font-size: 25px;
+  border-radius: 20px;
+  margin-left: 20px;
 }
 
+p {
+  color: white;
+  font-size: 30px;
+}
 .button-1 {
   height: 100px;
   width: 160px;
-  border-radius: 15%;
+  border-radius: 10px;
   font-weight: bold;
-  font-size: 30px
+  font-size: 30px;
+  vertical-align: bottom;
 
 }
 
@@ -39,8 +46,11 @@ body {
   display:none;
 }
 #reset-quiz {
-  height: 60px;
-  width: 100px;
+  height: 100px;
+  width: 200px;
+  border-radius: 15px;
+  font-size: 20px;
+
 }
 .main {
     height: 100%;
