@@ -33,12 +33,13 @@ function getDataFromApi(myDate) {
 }
 
 function renderData(state) {
+$('body').css('background-image', 'url('+state.url+')');
     var listElements = "<p>" + state.date + "</p>" +
         "<p>" + state.text + "</p>" +
-        "<img src ='" + state.url + "'>";
 
 
     $('main').html(listElements);
+
 }
 
 
@@ -51,6 +52,7 @@ $(function eventHandlers() {
 
     });
 })
+
 
 
 // https://api.nasa.gov/EPIC/api/natural/date/2015-10-31?api_key=eZW6vATkVUO5a2rbju1e9NZyCF88YB7oBr86Sfuc

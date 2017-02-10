@@ -1,1 +1,8 @@
 
+body {
+  /*background-image: url("http://apod.nasa.gov/apod/image/1612/farside_lro800.jpg");*/
+}
+.image-holder {
+  background-repeat: no-repeat;
+  background-size:contain;
+}
