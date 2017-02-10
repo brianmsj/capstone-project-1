@@ -1,8 +1,66 @@
 
 body {
-  /*background-image: url("http://apod.nasa.gov/apod/image/1612/farside_lro800.jpg");*/
-}
-.image-holder {
   background-repeat: no-repeat;
-  background-size:contain;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+
 }
+
+.background-image {
+  background-repeat:no-repeat;
+  background-size: contain;
+
+}
+
+.form-container {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+
+}
+
+.js-query {
+  height: 50px;
+  width: 250px;
+  font-size: 25px;
+}
+
+.button-1 {
+  height: 100px;
+  width: 160px;
+  border-radius: 15%;
+  font-weight: bold;
+  font-size: 30px
+
+}
+
+.hidden {
+  display:none;
+}
+#reset-quiz {
+  height: 60px;
+  width: 100px;
+}
+.main {
+    height: 100%;
+    width: 80%;
+    min-height: 100%;
+    margin:10px auto;
+    color: #ffffff
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px){
+    .main {
+        width: 60%;
+    }
+}
+
+@media screen and (min-device-width: 1025px) {
+    .main {
+        width: 50%;
+    }
+}
+
+.js-search-form {
+    a

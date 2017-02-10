@@ -1,56 +1,115 @@
-var state = {
+var INITIAL_STATE = {
     NASA_BASE_URL: 'https://api.nasa.gov/planetary/apod',
-    text: "",
+    url: 'http://apod.nasa.gov/apod/image/1612/farside_lro800.jpg',
+    explanation: "",
     image: "" ,
     date: "",
+    formDisplaying: true,
+    resetButtonDisplaying: false
 }
 
+var appState = Object.assign({}, INITIAL_STATE); //creates new object, merges all key values from second parameter
+console.log(appState);
 
-var addPOD = function(state,url,text,date) {
-    state.url = url;
-    state.text = text;
-    state.date = date;
-    renderData(state);
+
+// STATE MODIFICATION FUNCTIONS
+
+
+function handleNasaData(state, data){
+  state.url = data.url;
+  state.explanation = data.explanation;
+  state.date = data.date;
 }
 
-function handleNasaData(data){
-  var url = data.url;
-  var text = data.explanation;
-  var date = data.date;
-  addPOD(state,url,text,date);
+function toggleFormDisplay(state) {
+  state.formDisplaying = !state.formDisplaying
 
 }
-function getDataFromApi(myDate) {
+function toggleResetButtom(state) {
+  state.resetButtonDisplaying = !state.resetButtonDisplaying
+}
 
+function resetState(state){
+  state.explanation = '';
+  state.image = '';
+  state.date = '';
+  state.formDisplaying = true;
+  state.resetButtonDisplaying = false;
+  state.url = 'http://apod.nasa.gov/apod/image/1612/farside_lro800.jpg';
+}
+
+// API FUNCTION
+function getDataFromApi(state,myDate) {
     var query = {
         date: myDate,
         hd: false,
         api_key: 'eZW6vATkVUO5a2rbju1e9NZyCF88YB7oBr86Sfuc',
+    };
 
-    }
-    $.getJSON(state.NASA_BASE_URL, query, handleNasaData);
+    $.getJSON(state.NASA_BASE_URL, query, function(data){
+      console.log('sending response', data);
+      console.log('my state object:', state);
+      handleNasaData(state, data);
+      toggleFormDisplay(state);
+      toggleResetButtom(state);
+      renderData(state);
+    });
 
 }
 
+// DISPLAY MODIFICATION FUNCTIONS
 function renderData(state) {
-$('body').css('background-image', 'url('+state.url+')');
-    var listElements = "<p>" + state.date + "</p>" +
-        "<p>" + state.text + "</p>" +
+  console.log('Render is runnning...');
 
+    // look through every state property as needed and make a DOM decision
+    $('body').css('background-image', 'url('+state.url+')');
 
-    $('main').html(listElements);
+    console.log('state:', state);
+    if (state.date !== '' && state.explanation !== '') {
+      console.log('this if is running!');
+      var listElements = "<p>" + state.date + "</p>" +
+          "<p>" + state.explanation + "</p>";
+
+      if (state.resetButtonDisplaying){
+        listElements += "<button id='reset-quiz' class=''>Reset</button>";
+      } else {
+        listElements += "<button id='reset-quiz' class='hidden'>Reset</button>";
+      }
+
+      $('.main').html(listElements);
+    } else {
+      $('.main').empty();
+    }
+
+    if (state.formDisplaying){
+      $('.js-search-form').removeClass('hidden');
+    } else {
+      $('.js-search-form').addClass('hidden');
+    }
+
 
 }
 
-
-
+// EVENT HANDLER FUNCTIONS
 $(function eventHandlers() {
+    renderData(appState);
+
     $('.js-search-form').submit(function(event) {
         event.preventDefault();
         var myDate = $(event.currentTarget).find('.js-query').val();
-        getDataFromApi(myDate);
-
+        getDataFromApi(appState,myDate);
     });
+
+    $('.main').on('click', '#reset-quiz', function(){
+        resetState(appState);
+        renderData(appState);
+    });
+
+      // 1. retrieve user input from DOM (optional)
+      // 2. call a state modification function
+      // 3. call render function, passing in state
+
+
 })
 
 
