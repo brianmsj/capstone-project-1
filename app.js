@@ -13,6 +13,13 @@ var addPOD = function(state,url,text,date) {
     renderData(state);
 }
 
+function handleNasaData(data){
+  var url = data.url;
+  var text = data.explanation;
+  var date = data.date;
+  addPOD(state,url,text,date);
+
+}
 function getDataFromApi(myDate) {
 
     var query = {
@@ -21,7 +28,7 @@ function getDataFromApi(myDate) {
         api_key: 'eZW6vATkVUO5a2rbju1e9NZyCF88YB7oBr86Sfuc',
 
     }
-    $.getJSON(state.NASA_BASE_URL, query, callback);
+    $.getJSON(state.NASA_BASE_URL, query, handleNasaData);
 
 }
 
@@ -34,13 +41,7 @@ function renderData(state) {
     $('main').html(listElements);
 }
 
-function callback(data){
-  var url = data.url;
-  var text = data.explanation;
-  var date = data.date;
-  addPOD(state,url,text,date);
-  console.log(state);
-}
+
 
 $(function eventHandlers() {
     $('.js-search-form').submit(function(event) {
